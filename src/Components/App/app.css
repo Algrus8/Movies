@@ -1,0 +1,8 @@
+.wrapper {
+  min-height: 100%;
+  margin: 0px 15%;
+  background-color: #fff;
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+}

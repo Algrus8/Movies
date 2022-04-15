@@ -1,0 +1,39 @@
+.movie-card {
+  margin-left: 2rem;
+  margin-top: 2rem;
+  max-width: 46%;
+  display: flex;
+  box-shadow: 1px 1px 10px gray;
+}
+.movie-img {
+  max-width: 183px;
+  height: 281px;
+}
+.movie-info {
+  padding-left: 20px;
+}
+
+.movie-title {
+  margin-top: 12px;
+  font-size: 20px;
+  line-height: 28px;
+}
+.movie-date {
+  font-size: 12px;
+  color: #827e7e;
+  margin-top: 7px;
+  line-height: 22px;
+}
+.movie-genres {
+  display: flex;
+  flex-wrap: wrap;
+}
+.movie-genre {
+  margin-top: 7px;
+  margin-right: 8px;
+}
+
+.movie-description {
+  margin-top: 7px;
+  line-height: 22px;
+}
