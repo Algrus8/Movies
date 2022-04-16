@@ -4,5 +4,6 @@
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   padding-bottom: 2rem;
 }

@@ -56,11 +56,11 @@ export default class Movie extends Component {
     const cardContent = hasData ? <MovieCardContent content={content} /> : null;
 
     return (
-      <div className="movie-card">
+      <li className="movie-card">
         {errorMessage}
         {spin}
         {cardContent}
-      </div>
+      </li>
     );
   }
 }
