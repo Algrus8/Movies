@@ -1,7 +1,7 @@
 .movie-card {
   margin-left: 2rem;
   margin-top: 2rem;
-  max-width: 46%;
+  width: 454px;
   display: flex;
   box-shadow: 1px 1px 10px gray;
 }
@@ -11,6 +11,7 @@
 }
 .movie-info {
   padding-left: 20px;
+  padding-right: 20px;
 }
 
 .movie-title {
@@ -38,4 +39,9 @@
   line-height: 22px;
 }
 .ant-alert {
+}
+.ant-spin {
+  margin: 0 auto !important;
+  width: 454px !important;
+  height: 281px !important;
 }
