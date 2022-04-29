@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import "./search.css";
+import React, { Component } from 'react'
+import './search.css'
 export default class Search extends Component {
   render() {
-    const { onSearchChange, showAllOrRated, onlyRated } = this.props;
-    const searchClass = onlyRated ? "search-button" : "search-button active";
-    const ratedClass = onlyRated ? "rated-button active" : "rated-button";
+    const { onSearchChange, showAllOrRated, onlyRated } = this.props
+    const searchClass = onlyRated ? 'search-button' : 'search-button active'
+    const ratedClass = onlyRated ? 'rated-button active' : 'rated-button'
 
     const searchBar = onlyRated ? null : (
       <input
@@ -12,10 +12,10 @@ export default class Search extends Component {
         className="search-movies"
         placeholder="Type to search..."
         onChange={(event) => {
-          onSearchChange(event.target.value);
+          onSearchChange(event.target.value)
         }}
       />
-    );
+    )
 
     return (
       <div className="search">
@@ -29,6 +29,6 @@ export default class Search extends Component {
         </div>
         {searchBar}
       </div>
-    );
+    )
   }
 }

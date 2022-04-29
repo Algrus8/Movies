@@ -88,6 +88,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin: 0;
 }
 
 .description-container {
@@ -129,10 +130,6 @@
 
   .movie-date {
     margin-top: 4px;
-  }
-
-  .ant-rate.movie-rate {
-    /* margin-top: 30px !important; */
   }
 
   .rate-container {
