@@ -1,4 +1,11 @@
-.movie-list{
-  display:flex;
+.movie-list {
+  display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  /* .movie-list {
+    flex-shrink: 1;
+  } */
 }

@@ -2,21 +2,32 @@ import React, { Component } from "react";
 import "./search.css";
 export default class Search extends Component {
   render() {
-    const { onSearchChange, query } = this.props;
+    const { onSearchChange, showAllOrRated, onlyRated } = this.props;
+    const searchClass = onlyRated ? "search-button" : "search-button active";
+    const ratedClass = onlyRated ? "rated-button active" : "rated-button";
+
+    const searchBar = onlyRated ? null : (
+      <input
+        type="text"
+        className="search-movies"
+        placeholder="Type to search..."
+        onChange={(event) => {
+          onSearchChange(event.target.value);
+        }}
+      />
+    );
+
     return (
       <div className="search">
         <div className="search-buttons">
-          <button className="search-button active">Search</button>
-          <button className="rated-button">Rated</button>
+          <button className={searchClass} onClick={showAllOrRated}>
+            Search
+          </button>
+          <button className={ratedClass} onClick={showAllOrRated}>
+            Rated
+          </button>
         </div>
-        <input
-          type="text"
-          className="search-movies"
-          placeholder="Type to search..."
-          onChange={(event) => {
-            onSearchChange(event.target.value);
-          }}
-        />
+        {searchBar}
       </div>
     );
   }

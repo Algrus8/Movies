@@ -41,3 +41,8 @@
   color: #1890ff;
   border-bottom: 2px solid #1890ff;
 }
+@media (max-width: 768px) {
+  .search{
+    margin: 0;
+  }
+}

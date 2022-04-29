@@ -5,13 +5,10 @@
   font-style: normal;
 }
 
-/* html,
-body,
-#fullheight {
-  min-height: 100% !important;
-  height: 100%;
-} */
-
+:root {
+  --max-mobile-size: 768px;
+  --main-bg-color: brown;
+}
 *,
 body {
   margin: 0;
@@ -19,5 +16,16 @@ body {
   font-family: "inter";
 }
 body {
-  background-color: #e5e5e5;
+  padding: 0px 15%;
+  background-color: #f7f7f7 !important;
+}
+button {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 0;
+    background-color:#fff !important;
+  }
 }

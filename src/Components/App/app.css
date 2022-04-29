@@ -1,19 +1,31 @@
 .wrapper {
   min-height: 100%;
-  margin: 0px 15%;
+  /* margin: 0px 15%; */
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   padding-bottom: 2rem;
+  min-height: 100vh;
+  padding-left: 20px;
+  padding-right: 20px;
+  flex-shrink: 1;
 }
 
 .ant-pagination {
-  margin: 2rem auto !important;
+  display: flex;
+  justify-content: center;
+  margin: 2rem !important;
 }
 .ant-alert {
   margin: 2rem 2rem 0rem 2rem !important;
 }
 .nothing-found {
-  margin: 1rem auto 0px;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0px;
+}
+.offline-text {
+  margin: 2rem auto;
+  font-size: 2rem;
 }
