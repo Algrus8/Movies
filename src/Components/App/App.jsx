@@ -122,7 +122,7 @@ export default class App extends PureComponent {
     }
   }
 
-  renderMovies = () => {
+  RenderMovies = () => {
     const {
       movies,
       loading,
@@ -161,7 +161,7 @@ export default class App extends PureComponent {
     )
   }
 
-  renderSearch = () => {
+  RenderSearch = () => {
     const debounceSearch = this.debounce(this.onSearchChange, 500)
     const { onlyRated, error } = this.state
     if (error) {
@@ -179,10 +179,10 @@ export default class App extends PureComponent {
       <GenresProvider value={this.genres}>
         <div className="wrapper">
           <Online>
-            {this.renderSearch()}
+            <this.RenderSearch />
             {errorMessage}
             {find}
-            {this.renderMovies()}
+            <this.RenderMovies />
           </Online>
           <Offline>
             <p className="offline-text">We have lost the network, but we have not lost contact...</p>
