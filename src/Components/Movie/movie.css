@@ -7,6 +7,7 @@
   flex-shrink: 1;
   display: flex;
   box-shadow: 1px 1px 10px gray;
+  height: 281px;
 }
 .movie-img {
   max-width: 183px;

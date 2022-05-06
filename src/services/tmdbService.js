@@ -7,11 +7,20 @@ export default class tmdbService {
     const res = await fetch(
       `https://api.themoviedb.org/3/search/movie?api_key=${this.apiKey}&query=${query}&page=${page}`
     )
+
+    if (!res.ok) {
+      throw new Error(`Сan't find movies`)
+    }
+
     return await res.json()
   }
 
   async guestSession() {
     const session = await fetch(`https://api.themoviedb.org/3/authentication/guest_session/new?api_key=${this.apiKey}`)
+    if (!session.ok) {
+      throw new Error(`Сan't create guest session`)
+    }
+
     return await session.json()
   }
 
@@ -19,6 +28,10 @@ export default class tmdbService {
     const rated = await fetch(
       `https://api.themoviedb.org/3/guest_session/${sessionId}/rated/movies?api_key=${this.apiKey}&page=${page}`
     )
+
+    if (!rated.ok) {
+      throw new Error(`Сan't find rated movies`)
+    }
 
     return await rated.json()
   }
@@ -37,6 +50,11 @@ export default class tmdbService {
         body: JSON.stringify(requestBody),
       }
     )
+
+    if (!post.ok) {
+      throw new Error(`Сan't rate movie`)
+    }
+
     return post
   }
 

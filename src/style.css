@@ -1,6 +1,6 @@
 @font-face {
   font-family: "inter";
-  src: url("./assets/Inter-Regular.ttf") format("opentype");
+  src: url("./assets/./fonts/Inter-Regular.ttf") format("opentype");
   font-weight: 400;
   font-style: normal;
 }
@@ -11,12 +11,21 @@ body {
   padding: 0;
   font-family: "inter";
 }
+
+html,
+body {
+  height: 100%;
+}
+
 button {
   cursor: pointer;
 }
 #root {
   padding: 0px 15%;
   background-color: #f7f7f7;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 @media (max-width: 768px) {

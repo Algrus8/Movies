@@ -6,7 +6,7 @@ import tmdbService from '../../services/tmdbService'
 
 export default class Movie extends Component {
   ids = 0
-  renderGenres(genres = []) {
+  RenderGenres(genres = []) {
     return genres.map((genre) => {
       return (
         <button className="movie-genre" key={this.ids++}>
@@ -30,8 +30,8 @@ export default class Movie extends Component {
     const { movieId, sessionId, onError } = this.props
 
     if (value) {
-      tmdb.rateMovie(movieId, sessionId, value).catch(() => {
-        onError()
+      tmdb.rateMovie(movieId, sessionId, value).catch((error) => {
+        onError(error.message)
       })
     }
   }
@@ -51,7 +51,7 @@ export default class Movie extends Component {
             </p>
           </div>
           <p className="movie-date">{this.calculateDate(date)}</p>
-          <div className="movie-genres">{this.renderGenres(genres)}</div>
+          <div className="movie-genres">{this.RenderGenres(genres)}</div>
 
           <p className="movie-description">{description}</p>
           <div className="rate-container">

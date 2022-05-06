@@ -6,8 +6,7 @@ import './movie-list.css'
 
 export default class MovieList extends Component {
   prettieDescription = (string) => {
-    let arr = string.split(' ')
-    return arr.length > 20 ? `${arr.slice(0, 20).join(' ')}...` : string
+    return string.length > 150 ? `${string.slice(0, 150)}...` : string
   }
 
   calculateBorderColor(rate) {

@@ -25,28 +25,15 @@ export default class App extends PureComponent {
     ratedMovies: [],
     totalRatedPages: null,
     currentRatedPage: 1,
-  }
-
-  componentDidUpdate = (prevProps, prevState) => {
-    const { query, currentPage, currentRatedPage } = this.state
-    if (query !== prevState.query || currentPage !== prevState.currentPage) {
-      this.searchMovies()
-    }
-    if (prevState.currentRatedPage !== currentRatedPage) {
-      this.searchRatedMovies()
-    }
-  }
-
-  componentDidCatch() {
-    this.setState({ error: true })
+    errorMessage: 'Error',
   }
 
   onSearchChange = (query) => {
     this.setState({ query: query })
   }
 
-  onError = () => {
-    this.setState({ error: true, loading: false })
+  onError = (errorMessage) => {
+    this.setState({ error: true, loading: false, errorMessage })
   }
 
   onPaginationChange = (pageNumber) => {
@@ -88,8 +75,8 @@ export default class App extends PureComponent {
             })
           }
         })
-        .catch(() => {
-          this.onError()
+        .catch((error) => {
+          this.onError(error.message)
         })
     }
   }
@@ -108,8 +95,8 @@ export default class App extends PureComponent {
           loading: false,
         })
       })
-      .catch(() => {
-        this.onError()
+      .catch((error) => {
+        this.onError(error.message)
       })
   }
 
@@ -149,45 +136,68 @@ export default class App extends PureComponent {
           loading={loading}
           sessionId={this.sessionId}
           onError={this.onError}
-        ></MovieList>
+        />
         <Pagination
           current={onlyRated ? currentRatedPage : currentPage}
           onChange={this.onPaginationChange}
           pageSize="1"
           total={onlyRated ? totalRatedPages : totalPages}
           showSizeChanger={false}
-        ></Pagination>
+        />
       </React.Fragment>
     )
   }
 
   RenderSearch = () => {
-    const debounceSearch = this.debounce(this.onSearchChange, 500)
-    const { onlyRated, error } = this.state
+    const { onlyRated, error, query } = this.state
     if (error) {
       return null
     }
-    return <Search onSearchChange={debounceSearch} showAllOrRated={this.showAllOrRated} onlyRated={onlyRated} />
+    return (
+      <Search
+        onSearchChange={this.onSearchChange}
+        showAllOrRated={this.showAllOrRated}
+        onlyRated={onlyRated}
+        query={query}
+      />
+    )
+  }
+
+  debounceSearchMovies = this.debounce(this.searchMovies, 1000)
+
+  componentDidUpdate = (prevProps, prevState) => {
+    const { query, currentPage, currentRatedPage } = this.state
+
+    if (query !== prevState.query || currentPage !== prevState.currentPage) {
+      this.debounceSearchMovies()
+    }
+    if (prevState.currentRatedPage !== currentRatedPage) {
+      this.searchRatedMovies()
+    }
+  }
+
+  componentDidCatch() {
+    this.setState({ error: true })
   }
 
   render() {
-    const { error, query, notFind } = this.state
-    const errorMessage = error ? <Alert message="Error" type="error" /> : null
+    const { error, query, notFind, errorMessage } = this.state
+    const errorIndicator = error ? <Alert message={errorMessage} type="error" /> : null
 
     const find = notFind && query ? <div className="nothing-found">Nothing found</div> : null
     return (
       <GenresProvider value={this.genres}>
-        <div className="wrapper">
-          <Online>
+        <Online>
+          <div className="wrapper">
             <this.RenderSearch />
-            {errorMessage}
+            {errorIndicator}
             {find}
             <this.RenderMovies />
-          </Online>
-          <Offline>
-            <p className="offline-text">We have lost the network, but we have not lost contact...</p>
-          </Offline>
-        </div>
+          </div>
+        </Online>
+        <Offline>
+          <p className="offline-text">We have lost the network, but we have not lost contact...</p>
+        </Offline>
       </GenresProvider>
     )
   }
