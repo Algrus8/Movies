@@ -9,7 +9,7 @@ export default class tmdbService {
     )
 
     if (!res.ok) {
-      throw new Error(`Сan't find movies`)
+      throw new Error("Сan't find movies") // eslint-disable-line
     }
 
     return await res.json()
@@ -18,7 +18,7 @@ export default class tmdbService {
   async guestSession() {
     const session = await fetch(`https://api.themoviedb.org/3/authentication/guest_session/new?api_key=${this.apiKey}`)
     if (!session.ok) {
-      throw new Error(`Сan't create guest session`)
+      throw new Error("Сan't create guest session") // eslint-disable-line
     }
 
     return await session.json()
@@ -30,7 +30,7 @@ export default class tmdbService {
     )
 
     if (!rated.ok) {
-      throw new Error(`Сan't find rated movies`)
+      throw new Error("Сan't find rated movies") // eslint-disable-line
     }
 
     return await rated.json()
@@ -52,7 +52,7 @@ export default class tmdbService {
     )
 
     if (!post.ok) {
-      throw new Error(`Сan't rate movie`)
+      throw new Error("Сan't rate movie") // eslint-disable-line
     }
 
     return post

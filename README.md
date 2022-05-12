@@ -1,1 +1,1 @@
-https://react-movies-p72xw2alw-algrus8.vercel.app/
+https://react-movies-r6ks0trv3-algrus8.vercel.app/

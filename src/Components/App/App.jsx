@@ -19,9 +19,9 @@ export default class App extends PureComponent {
     loading: true,
     error: false,
     notFind: false,
+    onlyRated: false,
     totalPages: null,
     currentPage: 1,
-    onlyRated: false,
     ratedMovies: [],
     totalRatedPages: null,
     currentRatedPage: 1,
@@ -129,14 +129,15 @@ export default class App extends PureComponent {
     if (onlyRated && !ratedMovies.length) {
       return null
     }
-    return (
-      <React.Fragment>
-        <MovieList
-          movies={onlyRated ? ratedMovies : movies}
-          loading={loading}
-          sessionId={this.sessionId}
-          onError={this.onError}
-        />
+
+    const PaginationRender = () => {
+      if (onlyRated && totalRatedPages === 1) {
+        return null
+      }
+      if (!onlyRated && totalPages === 1) {
+        return null
+      }
+      return (
         <Pagination
           current={onlyRated ? currentRatedPage : currentPage}
           onChange={this.onPaginationChange}
@@ -144,6 +145,19 @@ export default class App extends PureComponent {
           total={onlyRated ? totalRatedPages : totalPages}
           showSizeChanger={false}
         />
+      )
+    }
+
+    return (
+      <React.Fragment>
+        <MovieList
+          movies={onlyRated ? ratedMovies : movies}
+          loading={loading}
+          sessionId={this.sessionId}
+          onError={this.onError}
+          onlyRated={onlyRated}
+        />
+        <PaginationRender />
       </React.Fragment>
     )
   }

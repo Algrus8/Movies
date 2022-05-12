@@ -2,11 +2,4 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  flex-grow: 1;
-}
-
-@media (max-width: 768px) {
-  /* .movie-list {
-    flex-shrink: 1;
-  } */
 }

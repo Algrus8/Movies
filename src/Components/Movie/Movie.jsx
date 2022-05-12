@@ -24,10 +24,11 @@ export default class Movie extends Component {
     })
   }
 
-  onRateClick = (value) => {
+  onRateClick = (value, id) => {
     const tmdb = new tmdbService()
-
     const { movieId, sessionId, onError } = this.props
+
+    localStorage.setItem(id, JSON.stringify({ value }))
 
     if (value) {
       tmdb.rateMovie(movieId, sessionId, value).catch((error) => {
@@ -36,9 +37,14 @@ export default class Movie extends Component {
     }
   }
 
-  renderMovie = () => {
-    const { content, genres } = this.props
+  RenderMovie = () => {
+    const { content, genres, id, onlyRated } = this.props
     const { title, date, description, poster, averageVote, borderColor, rating } = content
+
+    const savedRating = JSON.parse(localStorage.getItem(id))
+
+    let value = 0
+    savedRating ? (value = savedRating.value) : value
 
     return (
       <React.Fragment>
@@ -60,9 +66,11 @@ export default class Movie extends Component {
               allowClear={true}
               allowHalf={true}
               className="movie-rate"
-              defaultValue={rating}
-              onChange={this.onRateClick}
-            ></Rate>
+              defaultValue={onlyRated ? rating : value}
+              onChange={(value) => {
+                this.onRateClick(value, id)
+              }}
+            />
           </div>
         </div>
       </React.Fragment>
@@ -71,13 +79,18 @@ export default class Movie extends Component {
 
   render() {
     const { loading } = this.props
-    const spin = (
-      <div className="movie-spin">
-        <Spin tip="loading..." />
+    if (loading) {
+      return (
+        <div className="movie-spin">
+          <Spin tip="loading..." />
+        </div>
+      )
+    }
+
+    return (
+      <div className="movie-card">
+        <this.RenderMovie />
       </div>
     )
-    const cardContent = loading ? spin : this.renderMovie()
-
-    return <div className="movie-card">{cardContent}</div>
   }
 }

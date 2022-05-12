@@ -30,12 +30,12 @@ export default class MovieList extends Component {
   }
 
   render() {
-    const { movies, loading, sessionId, onError } = this.props
+    const { movies, loading, sessionId, onError, onlyRated } = this.props
 
     if (!movies) {
       return null
     }
-    const list = movies.map((movie) => {
+    const List = movies.map((movie) => {
       const { release_date: date, title, overview, poster_path: poster, id, genre_ids: genres, rating = null } = movie
       let { vote_average: averageVote } = movie
       const borderColor = this.calculateBorderColor(averageVote)
@@ -67,13 +67,15 @@ export default class MovieList extends Component {
                 sessionId={sessionId}
                 genres={this.translateGenres(allGenres, genres)}
                 onError={onError}
-              ></Movie>
+                id={id}
+                onlyRated={onlyRated}
+              />
             )
           }}
         </GenresConsumer>
       )
     })
 
-    return <div className="movie-list">{list}</div>
+    return <div className="movie-list">{List}</div>
   }
 }
